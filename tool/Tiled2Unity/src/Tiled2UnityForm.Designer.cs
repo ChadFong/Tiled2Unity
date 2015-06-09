@@ -43,6 +43,9 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addUnityPackageToProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.supportTiledMapEditorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.aboutTiled2UnityToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelScale = new System.Windows.Forms.Label();
             this.textBoxScale = new System.Windows.Forms.TextBox();
@@ -65,6 +68,7 @@
             this.richTextBoxOutput.TabIndex = 0;
             this.richTextBoxOutput.Text = "";
             this.richTextBoxOutput.WordWrap = false;
+            this.richTextBoxOutput.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxOutput_LinkClicked);
             // 
             // labelExport
             // 
@@ -84,9 +88,9 @@
             this.buttonFolderBrowser.Enabled = false;
             this.buttonFolderBrowser.Location = new System.Drawing.Point(89, 444);
             this.buttonFolderBrowser.Name = "buttonFolderBrowser";
-            this.buttonFolderBrowser.Size = new System.Drawing.Size(162, 23);
+            this.buttonFolderBrowser.Size = new System.Drawing.Size(109, 23);
             this.buttonFolderBrowser.TabIndex = 3;
-            this.buttonFolderBrowser.Text = "Choose Export Folder ...";
+            this.buttonFolderBrowser.Text = "Export To ...";
             this.buttonFolderBrowser.UseVisualStyleBackColor = true;
             this.buttonFolderBrowser.Click += new System.EventHandler(this.buttonFolderBrowser_Click);
             // 
@@ -106,11 +110,11 @@
             // 
             this.buttonViewer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonViewer.Enabled = false;
-            this.buttonViewer.Location = new System.Drawing.Point(544, 444);
+            this.buttonViewer.Location = new System.Drawing.Point(575, 444);
             this.buttonViewer.Name = "buttonViewer";
-            this.buttonViewer.Size = new System.Drawing.Size(151, 23);
+            this.buttonViewer.Size = new System.Drawing.Size(120, 23);
             this.buttonViewer.TabIndex = 4;
-            this.buttonViewer.Text = "Preview Exported Map";
+            this.buttonViewer.Text = "Preview Map";
             this.buttonViewer.UseVisualStyleBackColor = true;
             this.buttonViewer.Click += new System.EventHandler(this.buttonViewer_Click);
             // 
@@ -169,6 +173,9 @@
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addUnityPackageToProjectToolStripMenuItem,
             this.showHelpToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.supportTiledMapEditorToolStripMenuItem,
+            this.toolStripSeparator2,
             this.aboutTiled2UnityToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
@@ -187,6 +194,23 @@
             this.showHelpToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.showHelpToolStripMenuItem.Text = "Show Command &Help";
             this.showHelpToolStripMenuItem.Click += new System.EventHandler(this.showHelpToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(239, 6);
+            // 
+            // supportTiledMapEditorToolStripMenuItem
+            // 
+            this.supportTiledMapEditorToolStripMenuItem.Name = "supportTiledMapEditorToolStripMenuItem";
+            this.supportTiledMapEditorToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.supportTiledMapEditorToolStripMenuItem.Text = "&Support Tiled On Patreon ...";
+            this.supportTiledMapEditorToolStripMenuItem.Click += new System.EventHandler(this.supportTiledMapEditorToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(239, 6);
             // 
             // aboutTiled2UnityToolStripMenuItem
             // 
@@ -213,7 +237,7 @@
             this.textBoxScale.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.textBoxScale.Location = new System.Drawing.Point(90, 483);
             this.textBoxScale.Name = "textBoxScale";
-            this.textBoxScale.Size = new System.Drawing.Size(161, 20);
+            this.textBoxScale.Size = new System.Drawing.Size(108, 20);
             this.textBoxScale.TabIndex = 6;
             this.textBoxScale.Text = "1";
             this.textBoxScale.Validating += new System.ComponentModel.CancelEventHandler(this.textBoxScale_Validating);
@@ -279,6 +303,9 @@
         private System.Windows.Forms.ToolStripMenuItem addUnityPackageToProjectToolStripMenuItem;
         private System.Windows.Forms.Label labelScale;
         private System.Windows.Forms.TextBox textBoxScale;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem supportTiledMapEditorToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

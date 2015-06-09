@@ -28,6 +28,9 @@ namespace Tiled2Unity
 
         static private readonly float DefaultTexelBias = 8192.0f;
 
+        // The distance between "layers" in our meshes
+        static public readonly float Vertex_ZScale = 1.0f / 256.0f;
+
         static public bool AutoExport { get; private set; }
         static public float Scale { get; set; }
         static public float TexelBias { get; private set; }
@@ -196,7 +199,9 @@ namespace Tiled2Unity
             Program.WriteLine("  unity:isTrigger");
             Program.WriteLine("  unity:ignore");
             Program.WriteLine("  unity:collisionOnly");
+            Program.WriteLine("  unity:resource");
             Program.WriteLine("  (Other properties are exported for custom scripting in your Unity project)");
+            Program.WriteLine("Support Tiled Map Editor on Patreon: https://www.patreon.com/bjorn");
         }
 
         public static void WriteLine()

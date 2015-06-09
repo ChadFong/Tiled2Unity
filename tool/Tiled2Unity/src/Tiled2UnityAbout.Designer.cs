@@ -37,12 +37,12 @@
             }else{
             	this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             }
-			
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMegaDad)).BeginInit();
             this.SuspendLayout();
-            // 
+            //
             // buttonOkay
-            // 
+            //
             this.buttonOkay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOkay.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonOkay.Location = new System.Drawing.Point(535, 366);
@@ -52,9 +52,9 @@
             this.buttonOkay.Text = "OK";
             this.buttonOkay.UseVisualStyleBackColor = true;
             this.buttonOkay.Click += new System.EventHandler(this.buttonOkay_Click);
-            // 
+            //
             // pictureBoxMegaDad
-            // 
+            //
             this.pictureBoxMegaDad.Image = global::Tiled2Unity.Properties.Resources.mega_dad_stand;
             this.pictureBoxMegaDad.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxMegaDad.InitialImage")));
             this.pictureBoxMegaDad.Location = new System.Drawing.Point(12, 12);
@@ -63,18 +63,18 @@
             this.pictureBoxMegaDad.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBoxMegaDad.TabIndex = 1;
             this.pictureBoxMegaDad.TabStop = false;
-            // 
+            //
             // labelVersion
-            // 
+            //
             this.labelVersion.AutoSize = true;
             this.labelVersion.Location = new System.Drawing.Point(72, 12);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(96, 13);
             this.labelVersion.TabIndex = 3;
             this.labelVersion.Text = "Version Goes Here";
-            // 
+            //
             // richTextBoxAbout
-            // 
+            //
             this.richTextBoxAbout.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -88,9 +88,9 @@
             this.richTextBoxAbout.TabIndex = 2;
             this.richTextBoxAbout.Text = "Load Rich Text here ...";
             this.richTextBoxAbout.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.richTextBoxAbout_LinkClicked);
-            // 
+            //
             // Tiled2UnityAbout
-            // 
+            //
             this.AcceptButton = this.buttonOkay;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,7 +116,7 @@
 
         private System.Windows.Forms.Button buttonOkay;
         private System.Windows.Forms.PictureBox pictureBoxMegaDad;
-		private System.Windows.Forms.RichTextBox richTextBoxAbout;
+        private System.Windows.Forms.RichTextBox richTextBoxAbout;
         private System.Windows.Forms.Label labelVersion;
     }
 }

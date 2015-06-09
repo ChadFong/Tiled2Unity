@@ -17,7 +17,7 @@ namespace Tiled2Unity
         // By the time this is called, our assets should be ready to create the map prefab
         public void MeshImported(string objPath)
         {
-            string xmlPath = ImportUtils.GetXmlPathFromFile(objPath);
+            string xmlPath = GetXmlImportAssetPath(objPath);
             XDocument doc = XDocument.Load(xmlPath);
             foreach (var xmlPrefab in doc.Root.Elements("Prefab"))
             {
@@ -49,7 +49,8 @@ namespace Tiled2Unity
             tempPrefab.transform.localScale = new Vector3(prefabScale, prefabScale, prefabScale);
 
             // Part 4: Save the prefab, keeping references intact.
-            string prefabPath = ImportUtils.GetPrefabPathFromName(prefabName);
+            bool isResource = ImportUtils.GetAttributeAsBoolean(xmlPrefab, "resource", false);
+            string prefabPath = GetPrefabAssetPath(prefabName, isResource);
             UnityEngine.Object finalPrefab = AssetDatabase.LoadAssetAtPath(prefabPath, typeof(GameObject));
 
             if (finalPrefab == null)
@@ -213,7 +214,11 @@ namespace Tiled2Unity
                 float width = ImportUtils.GetAttributeAsFloat(xmlBoxCollider2D, "width");
                 float height = ImportUtils.GetAttributeAsFloat(xmlBoxCollider2D, "height");
                 collider.size = new Vector2(width, height);
+#if UNITY_5_0
                 collider.offset = new Vector2(width * 0.5f, -height * 0.5f);
+#else
+                collider.center = new Vector2(width * 0.5f, -height * 0.5f);
+#endif
             }
 
             // Circle colliders
@@ -223,7 +228,11 @@ namespace Tiled2Unity
                 collider.isTrigger = isTrigger;
                 float radius = ImportUtils.GetAttributeAsFloat(xmlCircleCollider2D, "radius");
                 collider.radius = radius;
+#if UNITY_5_0
                 collider.offset = new Vector2(radius, -radius);
+#else
+                collider.center = new Vector2(radius, -radius);
+#endif
             }
 
             // Edge colliders
@@ -320,6 +329,8 @@ namespace Tiled2Unity
                 map.TileWidth = ImportUtils.GetAttributeAsInt(goXml, "tileWidth");
                 map.TileHeight = ImportUtils.GetAttributeAsInt(goXml, "tileHeight");
                 map.ExportScale = ImportUtils.GetAttributeAsFloat(goXml, "exportScale");
+                map.MapWidthInPixels = ImportUtils.GetAttributeAsInt(goXml, "mapWidthInPixels");
+                map.MapHeightInPixels = ImportUtils.GetAttributeAsInt(goXml, "mapHeightInPixels");
             }
             catch
             {

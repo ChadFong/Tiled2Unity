@@ -97,6 +97,12 @@
     <Compile Include="PreviewPreferencesForm.Designer.cs">
       <DependentUpon>PreviewPreferencesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="SupportTiledForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SupportTiledForm.Designer.cs">
+      <DependentUpon>SupportTiledForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ThirdParty\Algorithmia\MultiValueDictionary.cs" />
     <Compile Include="ThirdParty\Clipper\clipper.cs" />
     <Compile Include="ThirdParty\NDesk\Options.cs" />
@@ -166,6 +172,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SupportTiledForm.resx">
+      <DependentUpon>SupportTiledForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Tiled2UnityAbout.resx">
       <DependentUpon>Tiled2UnityAbout.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +196,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Vector3D.cs" />
+    <EmbeddedResource Include="Resources\TiledOnPatreon.rtf" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -220,10 +230,6 @@
     <Content Include="t2u-icon-bw.ico" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ThirdParty\Ookii.Dialogs.Modified\src\Ookii.Dialogs\Ookii.Dialogs.csproj">
-      <Project>{779E62B3-C5A6-494D-9D87-96C0DEC7FFB0}</Project>
-      <Name>Ookii.Dialogs</Name>
-    </ProjectReference>
     <ProjectReference Include="ThirdParty\ThemeColorPicker\ThemeColorPicker.csproj">
       <Project>{A4D1EDB0-61E7-4943-AA8D-E545456BC392}</Project>
       <Name>ThemeColorPicker</Name>

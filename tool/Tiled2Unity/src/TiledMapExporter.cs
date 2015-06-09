@@ -25,7 +25,7 @@ namespace Tiled2Unity
             this.tmxMap = tmxMap;
         }
 
-        public void Export(string exportToUnityProjectPath)
+        public void Export(string exportToTiled2UnityPath)
         {
             // Create an Xml file to be imported by a Unity project
             // The unity project will have code that turns the Xml into Unity objects and prefabs
@@ -34,7 +34,7 @@ namespace Tiled2Unity
 
             // Need an element for embedded file data that will be imported into Unity
             // These are models and textures
-            List<XElement> importFiles = CreateImportFilesElements(exportToUnityProjectPath);
+            List<XElement> importFiles = CreateImportFilesElements(exportToTiled2UnityPath);
             List<XElement> assignMaterials = CreateAssignMaterialsElements();
 
             Program.WriteLine("Gathering prefab data ...");
@@ -58,41 +58,39 @@ namespace Tiled2Unity
                 root);
 
             // Build the export directory
-            string exportDir = Path.Combine(exportToUnityProjectPath, "Assets");
-            exportDir = Path.Combine(exportDir, "Tiled2Unity");
-            exportDir = Path.Combine(exportDir, "Imported");
+            string exportDir = Path.Combine(exportToTiled2UnityPath, "Imported");
 
             if (!Directory.Exists(exportDir))
             {
                 StringBuilder builder = new StringBuilder();
                 builder.AppendFormat("Could not export '{0}'\n", fileToSave);
-                builder.AppendFormat("Tiled2Unity.unitypackage is not installed in unity project: {0}\n", exportToUnityProjectPath);
+                builder.AppendFormat("Tiled2Unity.unitypackage is not installed in unity project: {0}\n", exportToTiled2UnityPath);
                 builder.AppendFormat("Select \"Help -> Import Unity Package to Project\" and re-export");
                 Program.WriteError(builder.ToString());
                 return;
             }
 
             // Detect which version of Tiled2Unity is in our project
-            // ...\unity-project\Assets\Tiled2Unity\Scripts\Editor\ImportTiled2Unity.Xml.cs
-            string unityProjectVersionCS = Path.Combine(exportToUnityProjectPath, "Assets", "Tiled2Unity", "Scripts", "Editor", "ImportTiled2Unity.Xml.cs");
-            if (!File.Exists(unityProjectVersionCS))
+            // ...\Tiled2Unity\Tiled2Unity.export.txt
+            string unityProjectVersionTXT = Path.Combine(exportToTiled2UnityPath, "Tiled2Unity.export.txt");
+            if (!File.Exists(unityProjectVersionTXT))
             {
                 StringBuilder builder = new StringBuilder();
                 builder.AppendFormat("Could not export '{0}'\n", fileToSave);
-                builder.AppendFormat("Tiled2Unity.unitypackage is not properly installed in unity project: {0}\n", exportToUnityProjectPath);
-                builder.AppendFormat("Missing file: {0}\n", unityProjectVersionCS);
+                builder.AppendFormat("Tiled2Unity.unitypackage is not properly installed in unity project: {0}\n", exportToTiled2UnityPath);
+                builder.AppendFormat("Missing file: {0}\n", unityProjectVersionTXT);
                 builder.AppendFormat("Select \"Help -> Import Unity Package to Project\" and re-export");
                 Program.WriteError(builder.ToString());
                 return;
             }
 
             // Open the unity-side script file and check its version number
-            string csText = File.ReadAllText(unityProjectVersionCS);
-            if (!String.IsNullOrEmpty(csText))
+            string text = File.ReadAllText(unityProjectVersionTXT);
+            if (!String.IsNullOrEmpty(text))
             {
-                string pattern = "string ThisVersion = \"(?<version>.*)?\";";
+                string pattern = @"^\[Tiled2Unity Version (?<version>.*)?\]";
                 Regex regex = new Regex(pattern);
-                Match match = regex.Match(csText);
+                Match match = regex.Match(text);
                 Group group = match.Groups["version"];
                 if (group.Success)
                 {
@@ -123,6 +121,11 @@ namespace Tiled2Unity
             return new Vector3D(pt.X, pt.Y == 0 ? 0 : -pt.Y, 0.0f);
         }
 
+        public static Vector3D PointFToUnityVector(float x, float y)
+        {
+            return PointFToUnityVector(new PointF(x, y));
+        }
+
         public static Vector3D PointFToUnityVector(PointF pt)
         {
             // Unity's coordinate sytem has y-up positive, y-down negative
@@ -142,7 +145,7 @@ namespace Tiled2Unity
             PointF scaled = pt;
             scaled.X *= Program.Scale;
             scaled.Y *= Program.Scale;
-            float scaled_z = pos_z *= Program.Scale;
+            float scaled_z = pos_z * Program.Vertex_ZScale;
 
             // Watch for negative zero, ffs
             return new Vector3D(scaled.X == 0 ? 0 : -scaled.X, scaled.Y == 0 ? 0 : -scaled.Y, scaled_z);
